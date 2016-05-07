@@ -29,8 +29,10 @@ Route::get('/', function () {
 Route::group(['middleware' => ['web']], function () {
     //
     Route::auth();
+
 });
-
-
-
+// admin/test
+Route::group(array('prefix' => 'admin'),function() {
+        Route::get('dashboard', 'Admin\HomeController@index');
+});
 Route::get('/home', 'HomeController@index');
