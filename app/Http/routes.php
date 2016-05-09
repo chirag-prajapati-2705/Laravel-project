@@ -32,7 +32,9 @@ Route::group(['middleware' => ['web']], function () {
 
 });
 // admin/test
-Route::group(array('prefix' => 'admin'),function() {
+Route::group(['prefix' => 'admin','middleware'=>[]],function() {
         Route::get('dashboard', 'Admin\HomeController@index');
+        Route::get('user/create', 'Admin\UserController@create');
+        Route::post('user/store', 'Admin\UserController@store');
 });
 Route::get('/home', 'HomeController@index');
