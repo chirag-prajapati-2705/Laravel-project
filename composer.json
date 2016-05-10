@@ -20,9 +20,8 @@
     "autoload": {
         "classmap": [
             "database",
-          "app/Model",
-          "app/Http/Controllers"
-
+            "app/Model",
+            "app/Http/Controllers"
         ],
         "psr-4": {
             "App\\": "app/",
@@ -33,7 +32,7 @@
     },
     "autoload-dev": {
         "classmap": [
-            "tests/TestCase.php",
+          "tests/TestCase.php",
           "app/Http/Controllers",
           "app/model"
         ]

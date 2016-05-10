@@ -26,15 +26,21 @@ Route::get('/', function () {
 |
 */
 
-Route::group(['middleware' => ['web']], function () {
+Route::group(['middleware' => 'web'], function () {
     //
     Route::auth();
 
+
 });
 // admin/test
-Route::group(['prefix' => 'admin','middleware'=>[]],function() {
-        Route::get('dashboard', 'Admin\HomeController@index');
-        Route::get('user/create', 'Admin\UserController@create');
-        Route::post('user/store', 'Admin\UserController@store');
+Route::group(['prefix' => 'admin','middleware' => 'web'],function() {
+    Route::resource('/posts', 'PostController@index');
+    Route::resource('post/create', 'PostController@create');
+    Route::resource('post/store', 'PostController@store');
+    Route::get('dashboard', 'HomeController@index');
+    Route::get('user/create', 'Admin\UserController@create');
+    Route::post('user/store', 'Admin\UserController@store');
+
 });
+
 Route::get('/home', 'HomeController@index');

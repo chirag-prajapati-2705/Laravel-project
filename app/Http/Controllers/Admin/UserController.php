@@ -31,23 +31,9 @@ class UserController extends Controller
             'password' => 'required',
             'confirm_concfirm' => 'required|same:password'           // required and has to match the password field
         );
-
-        // do the validation ----------------------------------
-        // validate against the inputs from our form
         $validator = Validator::make($request->all(), $rules);
-
-        // check if the validator failed -----------------------
         if ($validator->fails()) {
-
-            // get the error messages from the validator
-            $messages = $validator->messages();
-
-            // redirect our user back to the form with the errors from the validator
-        //    return Redirect::to('admin/user/create')->withErrors($validator);
-            Session::flash('message', 'My message');
-
-            return Redirect::to('admin/user/create')->withInput()->with('success', 'Group Created Successfully.');
-
+            return Redirect::to('admin/user/create')->withErrors($validator);
         }
     }
 
