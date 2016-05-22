@@ -1,5 +1,5 @@
 <!-- /#wrapper -->
-
+</div>
 <!-- jQuery -->
 <script src="{{ URL::asset('js/jquery.min.js') }}"></script>
 

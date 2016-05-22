@@ -11,8 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::post('/', function () {
+    return view('auth.login');
 });
 
 /*
@@ -26,13 +26,22 @@ Route::get('/', function () {
 |
 */
 
-Route::group(['middleware' => ['web']], function () {
+Route::group(['middleware' => 'web'], function () {
     //
     Route::auth();
 
+
 });
 // admin/test
-Route::group(array('prefix' => 'admin'),function() {
-        Route::get('dashboard', 'Admin\HomeController@index');
+Route::group(['prefix' => 'admin','middleware' => 'web'],function() {
+      Route::get('dashboard', 'Admin\HomeController@index');
+    Route::get('user/create', 'Admin\UserController@create');
+    Route::post('user/store', 'Admin\UserController@store');
+    Route::get('user/show', 'Admin\UserController@show');
+
+
+
+
 });
-Route::get('/home', 'HomeController@index');
+
+//Route::get('/home', 'HomeController@index');
