@@ -11,8 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::post('/', function () {
+    return view('auth.login');
 });
 
 /*
@@ -34,13 +34,14 @@ Route::group(['middleware' => 'web'], function () {
 });
 // admin/test
 Route::group(['prefix' => 'admin','middleware' => 'web'],function() {
-    Route::resource('/posts', 'PostController@index');
-    Route::resource('post/create', 'PostController@create');
-    Route::resource('post/store', 'PostController@store');
-    Route::get('dashboard', 'HomeController@index');
+      Route::get('dashboard', 'Admin\HomeController@index');
     Route::get('user/create', 'Admin\UserController@create');
     Route::post('user/store', 'Admin\UserController@store');
+    Route::get('user/show', 'Admin\UserController@show');
+
+
+
 
 });
 
-Route::get('/home', 'HomeController@index');
+//Route::get('/home', 'HomeController@index');

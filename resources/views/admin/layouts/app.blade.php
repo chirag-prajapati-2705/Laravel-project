@@ -256,6 +256,19 @@
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
+                    <li>
+                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Product<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="{{ URL::to('admin/product/create') }}">Add Product</a>
+                            </li>
+                            <li>
+                                <a href="{{ URL::to('admin/product/show') }}">List</a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
+
 
 
 
@@ -267,6 +280,8 @@
     </nav>
     </div>
     {{--@include('admin.error')--}}
+
+@include('admin.notification');
 
     @yield('content')
 

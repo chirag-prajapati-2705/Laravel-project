@@ -15,7 +15,7 @@
                             {{ csrf_field() }}
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                 <label>Name</label>
-                                {{Form::input('text','name','',['class'=>'form-control'])}}
+                                {{Form::input('text','name',Input::old('name'),['class'=>'form-control'])}}
                                 @if ($errors->has('name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>
@@ -24,7 +24,7 @@
                             </div>
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                                 <label>Email</label>
-                                {{Form::input('text','email','',['class'=>'form-control'])}}
+                                {{Form::input('text','email',Input::old('email'),['class'=>'form-control'])}}
                                 @if ($errors->has('email'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
@@ -40,17 +40,17 @@
                                     </span>
                                 @endif
                             </div>
-                            <div class="form-group{{ $errors->has('cconfirm_password') ? ' has-error' : '' }}">
+                            <div class="form-group{{ $errors->has('confirm_password') ? ' has-error' : '' }}">
                                 <label>Confirm Password</label>
-                                {{Form::input('password','cconfirm_password','',['class'=>'form-control'])}}
-                                @if ($errors->has('cconfirm_password'))
+                                {{Form::input('password','confirm_password','',['class'=>'form-control'])}}
+                                @if ($errors->has('confirm_password'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('cconfirm_password') }}</strong>
+                                        <strong>{{ $errors->first('confirm_password') }}</strong>
                                     </span>
                                 @endif
                             </div>
-                            <button type="submit" class="btn btn-default">Submit Button</button>
-                            <button type="reset" class="btn btn-default">Reset Button</button>
+                            <button type="submit" class="btn btn-primary">Submit Button</button>
+                            <button type="reset" class="btn btn-primary">Reset Button</button>
                             {{Form::close()}}
                         </div>
                     </div>
