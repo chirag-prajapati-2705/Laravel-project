@@ -38,7 +38,9 @@ Route::group(['prefix' => 'admin','middleware' => 'web'],function() {
     Route::get('user/create', 'Admin\UserController@create');
     Route::post('user/store', 'Admin\UserController@store');
     Route::get('user/show', 'Admin\UserController@show');
-
+    Route::get('product/create', 'Admin\ProductController@create');
+    Route::post('product/store', 'Admin\ProductController@store');
+    Route::get('product/show', 'Admin\ProductController@show');
 
 
 
