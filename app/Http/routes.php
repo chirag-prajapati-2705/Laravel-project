@@ -40,7 +40,13 @@ Route::group(['prefix' => 'admin','middleware' => 'web'],function() {
     Route::get('user/show', 'Admin\UserController@show');
     Route::get('product/create', 'Admin\ProductController@create');
     Route::post('product/store', 'Admin\ProductController@store');
-    Route::get('product/show', 'Admin\ProductController@show');
+    Route::get('product/show', 'Admin\ProductController@show')->name('product-list');
+    Route::get('product/edit/{id}', 'Admin\ProductController@edit');
+    Route::patch('/product/update/{id}',[
+        'as' => 'product.update',
+        'uses' => 'Admin\ProductController@update'
+    ]);
+    Route::resource('/product/destroy/{id}','Admin\ProductController@destroy');
 });
 
 Route::get('/', 'HomeController@index');

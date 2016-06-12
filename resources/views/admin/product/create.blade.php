@@ -11,7 +11,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-6">
-                            {{Form::open(array('url' => 'admin/product/store')) }}
+                            {{Form::open(array('url' => 'admin/product/store','files' => true)) }}
                             {{ csrf_field() }}
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                 <label>Name</label>
@@ -28,6 +28,15 @@
                                 @if ($errors->has('sku'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('sku') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                            <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">
+                                <label>Image</label>
+                                {{ Form::file('image') }}
+                                @if ($errors->has('image'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('image') }}</strong>
                                     </span>
                                 @endif
                             </div>
