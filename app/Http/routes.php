@@ -33,11 +33,14 @@ Route::group(['middleware' => 'web'], function () {
 
 });
 // admin/test
-Route::group(['prefix' => 'admin','middleware' => 'web'],function() {
+Route::group(['prefix' => 'admin', 'middleware' => 'web'], function () {
     Route::get('dashboard', 'Admin\HomeController@index');
     Route::get('user/create', 'Admin\UserController@create');
     Route::post('user/store', 'Admin\UserController@store');
     Route::get('user/show', 'Admin\UserController@show');
+    Route::get('user/edit/{id}', 'Admin\UserController@edit');
+    Route::resource('user/destroy/{id}', 'Admin\UserController@destroy');
+    Route::patch('/user/update/{id}', ['as' => 'user.update', 'uses' => 'Admin\UserController@update']);
     Route::get('product/create', 'Admin\ProductController@create');
     Route::post('product/store', 'Admin\ProductController@store');
     Route::get('product/show', 'Admin\ProductController@show');
