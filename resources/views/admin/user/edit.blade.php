@@ -35,7 +35,6 @@
 
 
                             <button type="submit" class="btn btn-primary">Submit Button</button>
-                            <button type="reset" class="btn btn-primary">Reset Button</button>
                             {{Form::close()}}
                         </div>
                     </div>

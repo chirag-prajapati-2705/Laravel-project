@@ -11,8 +11,8 @@
 |
 */
 
-Route::post('/', function () {
-    return view('auth.login');
+Route::get('/login', function () {
+return  Redirect::route('admin/login');
 });
 
 /*
@@ -25,25 +25,23 @@ Route::post('/', function () {
 | kernel and includes session state, CSRF protection, and more.
 |
 */
+Route::auth();
 
-Route::group(['middleware' => 'web'], function () {
-    //
-    Route::auth();
-
-
-});
 // admin/test
-Route::group(['prefix' => 'admin', 'middleware' => 'web'], function () {
-    Route::get('dashboard', 'Admin\HomeController@index');
-    Route::get('user/create', 'Admin\UserController@create');
-    Route::post('user/store', 'Admin\UserController@store');
-    Route::get('user/show', 'Admin\UserController@show');
-    Route::get('user/edit/{id}', 'Admin\UserController@edit');
-    Route::resource('user/destroy/{id}', 'Admin\UserController@destroy');
-    Route::patch('/user/update/{id}', ['as' => 'user.update', 'uses' => 'Admin\UserController@update']);
-    Route::get('product/create', 'Admin\ProductController@create');
-    Route::post('product/store', 'Admin\ProductController@store');
-    Route::get('product/show', 'Admin\ProductController@show');
+$router->group(['prefix' => 'admin', 'middleware' => 'web'], function ($router) {
+    $router->get('dashboard', 'Admin\HomeController@index')->name('admin-dashboard');
+    $router->get('user/create', 'Admin\UserController@create');
+    $router->post('user/store', 'Admin\UserController@store');
+    $router->get('user/show', 'Admin\UserController@show');
+    $router->get('user/edit/{id}', 'Admin\UserController@edit');
+    $router->patch('/user/update/{id}', ['as' => 'user.update', 'uses' => 'Admin\UserController@update']);
+    $router->get('product/create', 'Admin\ProductController@create');
+    $router->post('product/store', 'Admin\ProductController@store');
+    $router->get('product/show', 'Admin\ProductController@show');
+    $router->get('user/destroy/{id}', 'Admin\UserController@destroy');
 });
-
-Route::get('/', 'HomeController@index');
+//$router->group(['prefix' => 'admin'], function () use ($router) {
+//    $router->get('login', 'Auth\AuthController@getLogin')->name('get-admin-login');
+//    $router->post('login', 'Auth\AuthController@postLogin')->name('post-admin-login');
+//    $router->get('logout', 'Auth\AuthController@getLogout')->name('admin-logout');
+//});

@@ -36,14 +36,14 @@
                                             <td>{{$user->email}}</td>
                                             <td><a class="btn btn-danger btn-xs btn btn-xs btn-danger delete-btn"
                                                    href="{!! URL('admin/user/edit/'.$user->id) !!}">
-                                                    <i class="fa fa-trash" title="" data-placement="top"
+                                                    <i class="fa fa-edit" title="" data-placement="top"
                                                        data-toggle="tooltip"
-                                                       data-original-title="Delete"></i>Edit
+                                                       data-original-title="Delete"></i>
                                                 </a> <a class="btn btn-danger btn-xs btn btn-xs btn-danger delete-btn"
                                                         href="{!! URL('admin/user/destroy', $user->id) !!}">
                                                     <i class="fa fa-trash" title="" data-placement="top"
                                                        data-toggle="tooltip"
-                                                       data-original-title="Delete"></i>Delete
+                                                       data-original-title="Delete"></i>
                                                 </a></td>
                                         </tr>
 
