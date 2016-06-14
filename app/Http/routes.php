@@ -25,10 +25,12 @@ return  Redirect::route('admin/login');
 | kernel and includes session state, CSRF protection, and more.
 |
 */
-Route::auth();
+Route::group(['middleware' => 'web'], function () {
+    Route::auth();
+});
 
 // admin/test
-$router->group(['prefix' => 'admin', 'middleware' => 'web'], function ($router) {
+$router->group(['prefix' => 'admin','middleware' => 'auth'], function ($router) {
     $router->get('dashboard', 'Admin\HomeController@index')->name('admin-dashboard');
     $router->get('user/create', 'Admin\UserController@create');
     $router->post('user/store', 'Admin\UserController@store');
@@ -40,8 +42,8 @@ $router->group(['prefix' => 'admin', 'middleware' => 'web'], function ($router) 
     $router->get('product/show', 'Admin\ProductController@show');
     $router->get('user/destroy/{id}', 'Admin\UserController@destroy');
 });
-//$router->group(['prefix' => 'admin'], function () use ($router) {
-//    $router->get('login', 'Auth\AuthController@getLogin')->name('get-admin-login');
-//    $router->post('login', 'Auth\AuthController@postLogin')->name('post-admin-login');
-//    $router->get('logout', 'Auth\AuthController@getLogout')->name('admin-logout');
-//});
+$router->group(['prefix' => 'admin'], function () use ($router) {
+    $router->get('login', 'Auth\AuthController@getLogin')->name('get-admin-login');
+    $router->post('login', 'Auth\AuthController@postLogin')->name('post-admin-login');
+    $router->get('logout', 'Auth\AuthController@getLogout')->name('admin-logout');
+});

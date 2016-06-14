@@ -67,24 +67,31 @@ class AuthController extends Controller
     public function postLogin()
     {
         $input = Input::all();
-
         if (count($input) > 0) {
             $credentials = [
                 'email' => $input['email'],
                 'password' => $input['password'],
             ];
-
-      if(!Auth::attempt($credentials)){
-          Session::flash('error','Please enter correct email and password !');
-          return redirect()->back();
-      }
+            if (!Auth::attempt($credentials)) {
+                Session::flash('error', 'Please enter correct email and password !');
+                return redirect()->back();
+            }
             $user = Auth::getLastAttempted();
-            Auth::login($user,true);
-            Session::flash('success','user successfully login');
+            Auth::login($user, true);
+            Session::flash('success', 'user successfully login');
             return redirect()->route('admin-dashboard');
         } else {
             return view('auth.login')->withFlashDanger('Please enter correct email and password !');
         }
+    }
+
+    public function getLogout()
+    {
+
+        Auth::logout();
+        session()->flush();
+        Session::flash('success','successfull logout ');
+        return redirect('/admin/login');
     }
 
     /**
