@@ -14,7 +14,9 @@
 Route::post('/', function () {
     return view('auth.login');
 });
-
+Route::get('/{slug}', function () {
+    view('error.404');
+});
 /*
 |--------------------------------------------------------------------------
 | Application Routes
