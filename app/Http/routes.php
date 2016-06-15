@@ -11,8 +11,8 @@
 |
 */
 
-Route::post('/', function () {
-    return view('auth.login');
+Route::get('/login', function () {
+return  Redirect::route('admin/login');
 });
 Route::get('/{slug}', function () {
     view('errors.404');
@@ -27,13 +27,10 @@ Route::get('/{slug}', function () {
 | kernel and includes session state, CSRF protection, and more.
 |
 */
-
 Route::group(['middleware' => 'web'], function () {
-    //
     Route::auth();
-
-
 });
+
 // admin/test
 Route::group(['prefix' => 'admin','middleware' => 'web'],function() {
     Route::get('dashboard', 'Admin\HomeController@index');
@@ -56,5 +53,8 @@ Route::group(['prefix' => 'admin','middleware' => 'web'],function() {
     Route::resource('/product/destroy/{id}','Admin\ProductController@destroy');
 
 });
-
-Route::get('/', 'HomeController@index');
+$router->group(['prefix' => 'admin'], function () use ($router) {
+    $router->get('login', 'Auth\AuthController@getLogin')->name('get-admin-login');
+    $router->post('login', 'Auth\AuthController@postLogin')->name('post-admin-login');
+    $router->get('logout', 'Auth\AuthController@getLogout')->name('admin-logout');
+});

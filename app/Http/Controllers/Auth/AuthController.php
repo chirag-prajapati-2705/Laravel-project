@@ -7,6 +7,10 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Request;
+use Auth;
+use Input;
+use Session;
 
 class AuthController extends Controller
 {
@@ -43,7 +47,7 @@ class AuthController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
@@ -55,10 +59,45 @@ class AuthController extends Controller
         ]);
     }
 
+    public function getLogin()
+    {
+        return View('auth.login');
+    }
+
+    public function postLogin()
+    {
+        $input = Input::all();
+        if (count($input) > 0) {
+            $credentials = [
+                'email' => $input['email'],
+                'password' => $input['password'],
+            ];
+            if (!Auth::attempt($credentials)) {
+                Session::flash('error', 'Please enter correct email and password !');
+                return redirect()->back();
+            }
+            $user = Auth::getLastAttempted();
+            Auth::login($user, true);
+            Session::flash('success', 'user successfully login');
+            return redirect()->route('admin-dashboard');
+        } else {
+            return view('auth.login')->withFlashDanger('Please enter correct email and password !');
+        }
+    }
+
+    public function getLogout()
+    {
+
+        Auth::logout();
+        session()->flush();
+        Session::flash('success','successfull logout ');
+        return redirect('/admin/login');
+    }
+
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return User
      */
     protected function create(array $data)
