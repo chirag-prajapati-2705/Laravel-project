@@ -14,7 +14,9 @@
 Route::post('/', function () {
     return view('auth.login');
 });
-
+Route::get('/{slug}', function () {
+    view('errors.404');
+});
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -40,13 +42,19 @@ Route::group(['prefix' => 'admin','middleware' => 'web'],function() {
     Route::get('user/show', 'Admin\UserController@show');
     Route::get('product/create', 'Admin\ProductController@create');
     Route::post('product/store', 'Admin\ProductController@store');
-    Route::get('product/show', 'Admin\ProductController@show')->name('product-list');
+    Route::get('product/show', 'Admin\ProductController@show');
+
+    // Password Reset Routes...
+    Route::get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
+    Route::post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
+    Route::post('password/reset', 'Auth\PasswordController@reset');
     Route::get('product/edit/{id}', 'Admin\ProductController@edit');
     Route::patch('/product/update/{id}',[
         'as' => 'product.update',
         'uses' => 'Admin\ProductController@update'
     ]);
     Route::resource('/product/destroy/{id}','Admin\ProductController@destroy');
+
 });
 
 Route::get('/', 'HomeController@index');
