@@ -15,7 +15,7 @@ Route::post('/', function () {
     return view('auth.login');
 });
 Route::get('/{slug}', function () {
-    view('error.404');
+    view('errors.404');
 });
 /*
 |--------------------------------------------------------------------------
