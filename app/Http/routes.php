@@ -43,6 +43,12 @@ Route::group(['prefix' => 'admin','middleware' => 'web'],function() {
     Route::get('product/create', 'Admin\ProductController@create');
     Route::post('product/store', 'Admin\ProductController@store');
     Route::get('product/show', 'Admin\ProductController@show');
+
+    // Password Reset Routes...
+    Route::get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
+    Route::post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
+    Route::post('password/reset', 'Auth\PasswordController@reset');
+
 });
 
 Route::get('/', 'HomeController@index');
