@@ -6,12 +6,12 @@
         <div class="container">
             <div class="row">
                 <div class="panel-heading">
-                  <h1>Create New Product</h1>
+                    <h1>Create New Product</h1>
                 </div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-6">
-                            {{Form::open(array('url' => 'admin/product/store','files' => true)) }}
+                            {{ Form::model($product, array('method' => 'PATCH', 'route' => array('product.update', $product->id))) }}
                             {{ csrf_field() }}
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                 <label>Name</label>

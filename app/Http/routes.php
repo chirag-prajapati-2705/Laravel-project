@@ -14,7 +14,9 @@
 Route::get('/login', function () {
 return  Redirect::route('admin/login');
 });
-
+Route::get('/{slug}', function () {
+    view('errors.404');
+});
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -30,17 +32,26 @@ Route::group(['middleware' => 'web'], function () {
 });
 
 // admin/test
-$router->group(['prefix' => 'admin','middleware' => 'auth'], function ($router) {
-    $router->get('dashboard', 'Admin\HomeController@index')->name('admin-dashboard');
-    $router->get('user/create', 'Admin\UserController@create');
-    $router->post('user/store', 'Admin\UserController@store');
-    $router->get('user/show', 'Admin\UserController@show');
-    $router->get('user/edit/{id}', 'Admin\UserController@edit');
-    $router->patch('/user/update/{id}', ['as' => 'user.update', 'uses' => 'Admin\UserController@update']);
-    $router->get('product/create', 'Admin\ProductController@create');
-    $router->post('product/store', 'Admin\ProductController@store');
-    $router->get('product/show', 'Admin\ProductController@show');
-    $router->get('user/destroy/{id}', 'Admin\UserController@destroy');
+Route::group(['prefix' => 'admin','middleware' => 'web'],function() {
+    Route::get('dashboard', 'Admin\HomeController@index');
+    Route::get('user/create', 'Admin\UserController@create');
+    Route::post('user/store', 'Admin\UserController@store');
+    Route::get('user/show', 'Admin\UserController@show');
+    Route::get('product/create', 'Admin\ProductController@create');
+    Route::post('product/store', 'Admin\ProductController@store');
+    Route::get('product/show', 'Admin\ProductController@show');
+
+    // Password Reset Routes...
+    Route::get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
+    Route::post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
+    Route::post('password/reset', 'Auth\PasswordController@reset');
+    Route::get('product/edit/{id}', 'Admin\ProductController@edit');
+    Route::patch('/product/update/{id}',[
+        'as' => 'product.update',
+        'uses' => 'Admin\ProductController@update'
+    ]);
+    Route::resource('/product/destroy/{id}','Admin\ProductController@destroy');
+
 });
 $router->group(['prefix' => 'admin'], function () use ($router) {
     $router->get('login', 'Auth\AuthController@getLogin')->name('get-admin-login');
