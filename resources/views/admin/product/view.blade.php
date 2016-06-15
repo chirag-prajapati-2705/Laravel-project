@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('content')
- @if(!empty($users))
+ @if(!empty($products))
      <div id="page-wrapper">
          <div class="row">
              <div class="col-lg-12">
@@ -23,23 +23,35 @@
                                  <thead>
                                  <tr>
                                      <th>Name</th>
-                                     <th>Email</th>
+                                     <th>Sku</th>
+                                     <th>Status</th>
+                                     <th>Action</th>
                                  </tr>
                                  </thead>
                                  <tbody>
 
-     @foreach($users as $user)
+     @foreach($products as $product)
 
          <tr class="odd gradeX">
-             <td>{{$user->name}}</td>
-                 <td>{{$user->email}}</td>
+             <td>{{$product->name}}</td>
+                 <td>{{$product->sku}}</td>
+             <td>{{($product->sku==1)?'Active':"Inactive"}}</td>
+             <td> <a class="btn btn-danger btn-xs btn btn-xs btn-danger delete-btn"
+                     href="{!! URL('admin/product/edit/'.$product->id) !!}">
+                     <i class="fa fa-trash" title="" data-placement="top" data-toggle="tooltip"
+                        data-original-title="Delete"></i>Edit
+                 </a> <a class="btn btn-danger btn-xs btn btn-xs btn-danger delete-btn"
+                     href="{!! URL('admin/product/destroy', $product->id) !!}">
+                     <i class="fa fa-trash" title="" data-placement="top" data-toggle="tooltip"
+                        data-original-title="Delete"></i>Delete
+                 </a></td>
              </tr>
 
          @endforeach
                                  </tbody>
                              </table>
      </div>
-                         <?php echo $users->links(); ?>
+                         <?php echo $products->links(); ?>
 
  @endif
 @endsection

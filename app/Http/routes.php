@@ -48,6 +48,12 @@ Route::group(['prefix' => 'admin','middleware' => 'web'],function() {
     Route::get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
     Route::post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
     Route::post('password/reset', 'Auth\PasswordController@reset');
+    Route::get('product/edit/{id}', 'Admin\ProductController@edit');
+    Route::patch('/product/update/{id}',[
+        'as' => 'product.update',
+        'uses' => 'Admin\ProductController@update'
+    ]);
+    Route::resource('/product/destroy/{id}','Admin\ProductController@destroy');
 
 });
 
