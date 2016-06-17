@@ -35,7 +35,6 @@ class EmailNotifier
         $to=$event->user->email;
         $message="Welcome ,You have successfully registered";
         $subject="Registration";
-       $send_email= $this->email_service->sendEmail($to,$message,$subject,'email.register_email');
-        dd($send_email);
+        $send_email= $this->email_service->sendEmail($to,$message,$subject,'email.register_email');
     }
 }
