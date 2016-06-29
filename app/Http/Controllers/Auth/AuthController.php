@@ -79,7 +79,7 @@ class AuthController extends Controller
             $user = Auth::getLastAttempted();
             Auth::login($user, true);
             Session::flash('success', 'user successfully login');
-            return redirect()->route('admin-dashboard');
+            return redirect('admin/dashboard');
         } else {
             return view('auth.login')->withFlashDanger('Please enter correct email and password !');
         }
@@ -87,7 +87,6 @@ class AuthController extends Controller
 
     public function getLogout()
     {
-
         Auth::logout();
         session()->flush();
         Session::flash('success','successfull logout ');

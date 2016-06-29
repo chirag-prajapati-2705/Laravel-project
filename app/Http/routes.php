@@ -11,12 +11,6 @@
 |
 */
 
-Route::get('/login', function () {
-return  Redirect::route('admin/login');
-});
-Route::get('/{slug}', function () {
-    view('errors.404');
-});
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -28,11 +22,11 @@ Route::get('/{slug}', function () {
 |
 */
 Route::group(['middleware' => 'web'], function () {
-    Route::auth();
+    // Route::auth();
 });
 
 // admin/test
-Route::group(['prefix' => 'admin','middleware' => 'web'],function() {
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('dashboard', 'Admin\HomeController@index');
     Route::get('user/create', 'Admin\UserController@create');
     Route::post('user/store', 'Admin\UserController@store');
@@ -46,15 +40,26 @@ Route::group(['prefix' => 'admin','middleware' => 'web'],function() {
     Route::post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
     Route::post('password/reset', 'Auth\PasswordController@reset');
     Route::get('product/edit/{id}', 'Admin\ProductController@edit');
-    Route::patch('/product/update/{id}',[
+    Route::patch('/product/update/{id}', [
         'as' => 'product.update',
         'uses' => 'Admin\ProductController@update'
     ]);
-    Route::resource('/product/destroy/{id}','Admin\ProductController@destroy');
+    Route::put('/product/destroy/{id}', 'Admin\ProductController@destroy');
 
 });
 $router->group(['prefix' => 'admin'], function () use ($router) {
     $router->get('login', 'Auth\AuthController@getLogin')->name('get-admin-login');
     $router->post('login', 'Auth\AuthController@postLogin')->name('post-admin-login');
-    $router->get('logout', 'Auth\AuthController@getLogout')->name('admin-logout');
+    $router->get('logout', function () {
+        Auth::logout();
+        session()->flush();
+        Session::flash('success', 'successfull logout ');
+        return redirect('/admin/login');
+    });
+});
+Route::get('/login', function () {
+    return redirect('admin/login');
+});
+Route::get('/{slug}', function () {
+    view('errors.404');
 });
