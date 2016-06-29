@@ -19,9 +19,5 @@ Class ProductRepository implements ProductRepositoryInterface
         return $product;
     }
 
-    public function getImageById($id)
-    {
-        $product_image = ProductImage::where('product_id', $id)->first();
-        return $product_image;
-    }
+
 }

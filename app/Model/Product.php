@@ -2,6 +2,7 @@
 
 namespace App\Admin;
 
+use App\Model\ProductImage;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
@@ -16,4 +17,10 @@ class Product extends Model
     protected $fillable = [
         'name', 'sku', 'status',
     ];
+
+    public function image(){
+        return $this->hasOne(ProductImage::class);
+    }
+
+
 }

@@ -9,5 +9,5 @@ namespace App\Interfaces;
 
 interface ProductRepositoryInterface{
     public function getById($slug);
-    public function getImageById($id);
+
 }
