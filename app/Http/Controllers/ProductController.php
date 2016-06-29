@@ -18,7 +18,7 @@ protected $product_repository;
     public function index($slug){
      //   dd($slug);
         $product=$this->product_repository->getById($slug);
-        //dd($product->id);
+        dd($product->id);
         $product_image=$this->product_repository->getImageById($product->id);
      return   view('product.index')->with('product',$product)->with('product_image',$product_image);
 
