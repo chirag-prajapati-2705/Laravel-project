@@ -92,14 +92,14 @@ class ProductController extends Controller
             $product->save();
             if (Input::hasFile('image')) {
                 $file = Input::file('image');
-                $image_name = $this->resize($file, self::RESZE_IMAGE_WIDTH);
+                $image_name = $this->image_service->upload($file, self::RESZE_IMAGE_WIDTH, true);
                 $product_image = ProductImage::find(Input::get('image_id'));
                 $product_image->product_id = $product_id;
                 $product_image->image_name = $image_name;
                 $product_image->save();
             }
             Session::flash('success', 'Product successfully updated!');
-            return Redirect('admin/product/show');
+            return Redirect::back();
         }
     }
 
