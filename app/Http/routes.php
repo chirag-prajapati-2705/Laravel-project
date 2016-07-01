@@ -26,9 +26,11 @@ Route::get('/login', function () {
     return  Redirect::route('admin/login');
 });
 Route::group(['middleware' => 'web'], function () {
-    Route::auth();
+    // Route::auth();
 });
-Route::group(['prefix' => 'admin','middleware' => 'web'],function() {
+
+// admin/test
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('dashboard', 'Admin\HomeController@index');
     Route::get('user/create', 'Admin\UserController@create');
     Route::post('user/store', 'Admin\UserController@store');
@@ -41,7 +43,7 @@ Route::group(['prefix' => 'admin','middleware' => 'web'],function() {
     Route::post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
     Route::post('password/reset', 'Auth\PasswordController@reset');
     Route::get('product/edit/{id}', 'Admin\ProductController@edit');
-    Route::patch('/product/update/{id}',[
+    Route::patch('/product/update/{id}', [
         'as' => 'product.update',
         'uses' => 'Admin\ProductController@update'
     ]);
@@ -51,10 +53,20 @@ Route::group(['prefix' => 'admin','middleware' => 'web'],function() {
 $router->group(['prefix' => 'admin'], function () use ($router) {
     $router->get('login', 'Auth\AuthController@getLogin')->name('get-admin-login');
     $router->post('login', 'Auth\AuthController@postLogin')->name('post-admin-login');
-    $router->get('logout', 'Auth\AuthController@getLogout')->name('admin-logout');
+    $router->get('logout', function () {
+        Auth::logout();
+        session()->flush();
+        Session::flash('success', 'successfull logout ');
+        return redirect('/admin/login');
+    });
 });
 Route::get('register', 'RegistrationController@show')->name('registration');
 Route::post('register', 'RegistrationController@store')->name('register');
+Route::get('/{slug}', function () {
+    view('errors.404');
+});Route::get('/login', function () {
+    return redirect('admin/login');
+});
 Route::get('/{slug}', function () {
     view('errors.404');
 });

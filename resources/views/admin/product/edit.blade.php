@@ -2,7 +2,6 @@
 
 @section('content')
 
-    <div id="page-wrapper">
         <div class="container">
             <div class="row">
                 <div class="panel-heading">
@@ -11,7 +10,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-6">
-                            {{ Form::model($product, array('method' => 'PATCH', 'route' => array('product.update', $product->id))) }}
+                            {{ Form::model($product, array('method' => 'PATCH', 'route' => array('product.update', $product->id),'files' => true)) }}
                             {{ csrf_field() }}
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                 <label>Name</label>
@@ -34,13 +33,21 @@
                             <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">
                                 <label>Image</label>
                                 {{ Form::file('image') }}
+                                @if(isset($product->image))
+                                   {{ Form::image('uploads/'.$product->image->image_name, null, ['class' => 'product-image'])}}
+                                    {{Form::hidden('image_id',$product->image->id)}}
+                                @endif
                                 @if ($errors->has('image'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('image') }}</strong>
                                     </span>
                                 @endif
                             </div>
-                            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                            <div class="form-group{{ $errors->has('price') ? ' has-error' : '' }}">
+                                <label>price</label>
+                                {{Form::input('text','price',Input::old('price'),['class'=>'form-control'])}}
+                            </div>
+                            <div class="form-group">
                                 <label>Status</label>
                                 {{Form::select('status',array('1'=>'Active','2'=>'InActive'),'',['class'=>'form-control'])}}
 
@@ -58,7 +65,4 @@
                 <!-- /.col-lg-12 -->
             </div>
         </div>
-
-
-    </div>
 @endsection
