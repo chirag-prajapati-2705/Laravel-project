@@ -11,12 +11,7 @@
 |
 */
 
-Route::get('/login', function () {
-return  Redirect::route('admin/login');
-});
-Route::get('/{slug}', function () {
-    view('errors.404');
-});
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -27,11 +22,12 @@ Route::get('/{slug}', function () {
 | kernel and includes session state, CSRF protection, and more.
 |
 */
+Route::get('/login', function () {
+    return  Redirect::route('admin/login');
+});
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 });
-
-// admin/test
 Route::group(['prefix' => 'admin','middleware' => 'web'],function() {
     Route::get('dashboard', 'Admin\HomeController@index');
     Route::get('user/create', 'Admin\UserController@create');
@@ -40,7 +36,6 @@ Route::group(['prefix' => 'admin','middleware' => 'web'],function() {
     Route::get('product/create', 'Admin\ProductController@create');
     Route::post('product/store', 'Admin\ProductController@store');
     Route::get('product/show', 'Admin\ProductController@show');
-
     // Password Reset Routes...
     Route::get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
     Route::post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
@@ -50,11 +45,16 @@ Route::group(['prefix' => 'admin','middleware' => 'web'],function() {
         'as' => 'product.update',
         'uses' => 'Admin\ProductController@update'
     ]);
-    Route::resource('/product/destroy/{id}','Admin\ProductController@destroy');
+    Route::put('/product/destroy/{id}','Admin\ProductController@destroy');
 
 });
 $router->group(['prefix' => 'admin'], function () use ($router) {
     $router->get('login', 'Auth\AuthController@getLogin')->name('get-admin-login');
     $router->post('login', 'Auth\AuthController@postLogin')->name('post-admin-login');
     $router->get('logout', 'Auth\AuthController@getLogout')->name('admin-logout');
+});
+Route::get('register', 'RegistrationController@show')->name('registration');
+Route::post('register', 'RegistrationController@store')->name('register');
+Route::get('/{slug}', function () {
+    view('errors.404');
 });
