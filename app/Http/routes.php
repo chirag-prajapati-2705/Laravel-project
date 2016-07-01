@@ -59,6 +59,27 @@ $router->group(['prefix' => 'admin'], function () use ($router) {
         Session::flash('success', 'successfull logout ');
         return redirect('/admin/login');
     });
+   
+});
+Route::get('/login', function () {
+    return redirect('admin/login');
+});
+Route::get('/{slug}', function ($slug) {
+
+    if (\App\Admin\Product::where('sku', $slug)->count()) {
+        //Route::get('/{slug}','ProductController@index');
+        //return redirect(route('HomeController@index',$slug));
+        $app=app();
+        $controller=$app->make('App\Http\Controllers\ProductController');
+        return $controller->CallAction('index',[$slug]);
+    } else if (App\User::where('username', $slug)->count()) {
+        // return redirect()->action('User\ProfileController@index', [$slug]);
+        // return App::make('App\Http\Controllers\User\ProfileController', [$slug])->index();
+        return 'User found';
+    } else {
+        return view('errors.404');
+    }
+    //view('errors.404');
 });
 Route::get('register', 'RegistrationController@show')->name('registration');
 Route::post('register', 'RegistrationController@store')->name('register');

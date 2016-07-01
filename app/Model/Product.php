@@ -19,7 +19,7 @@ class Product extends  \Eloquent
         'name', 'sku','price', 'status',
     ];
 
-    public function image() {
+      public function image() {
         return $this->hasOne(ProductImage::class,'product_id','id'); // this matches the Eloquent model
     }
 }
