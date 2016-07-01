@@ -87,7 +87,6 @@ class AuthController extends Controller
 
     public function getLogout()
     {
-
         Auth::logout();
         session()->flush();
         Session::flash('success','successfull logout ');

@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Listeners\EmailNotifier;
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use App\Events\UserRegistered;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -16,6 +18,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\SomeEvent' => [
             'App\Listeners\EventListener',
         ],
+       UserRegistered::class =>[
+           EmailNotifier::class
+       ],
     ];
 
     /**

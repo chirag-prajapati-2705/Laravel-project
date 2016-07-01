@@ -11,6 +11,7 @@
 |
 */
 
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -21,6 +22,9 @@
 | kernel and includes session state, CSRF protection, and more.
 |
 */
+Route::get('/login', function () {
+    return  Redirect::route('admin/login');
+});
 Route::group(['middleware' => 'web'], function () {
     // Route::auth();
 });
@@ -34,7 +38,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('product/create', 'Admin\ProductController@create');
     Route::post('product/store', 'Admin\ProductController@store');
     Route::get('product/show', 'Admin\ProductController@show');
-
     // Password Reset Routes...
     Route::get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
     Route::post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
@@ -44,7 +47,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
         'as' => 'product.update',
         'uses' => 'Admin\ProductController@update'
     ]);
-    Route::put('/product/destroy/{id}', 'Admin\ProductController@destroy');
+    Route::put('/product/destroy/{id}','Admin\ProductController@destroy');
 
 });
 $router->group(['prefix' => 'admin'], function () use ($router) {
@@ -56,6 +59,7 @@ $router->group(['prefix' => 'admin'], function () use ($router) {
         Session::flash('success', 'successfull logout ');
         return redirect('/admin/login');
     });
+   
 });
 Route::get('/login', function () {
     return redirect('admin/login');
@@ -76,4 +80,14 @@ Route::get('/{slug}', function ($slug) {
         return view('errors.404');
     }
     //view('errors.404');
+});
+Route::get('register', 'RegistrationController@show')->name('registration');
+Route::post('register', 'RegistrationController@store')->name('register');
+Route::get('/{slug}', function () {
+    view('errors.404');
+});Route::get('/login', function () {
+    return redirect('admin/login');
+});
+Route::get('/{slug}', function () {
+    view('errors.404');
 });

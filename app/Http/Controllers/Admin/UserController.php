@@ -49,7 +49,7 @@ class UserController extends Controller
 
     public function show()
     {
-        $user = User::paginate(1);
+        $user = User::all();
         return view('admin.user.view')->with('users', $user);
     }
 
