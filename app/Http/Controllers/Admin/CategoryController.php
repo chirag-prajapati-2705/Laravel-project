@@ -86,7 +86,6 @@ class CategoryController extends Controller
     public function destroy($category_id)
     {
         $delete_category = Category::destroy($category_id);
-
         if ($delete_category) {
             Session::flash('success', 'Category successfully deleted!');
             return Redirect('admin/category/show');

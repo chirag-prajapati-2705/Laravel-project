@@ -42,7 +42,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::post('password/reset', 'Auth\PasswordController@reset');
 
 
-    Route::put('/product/destroy/{id}','Admin\ProductController@destroy');
+
 
 });
 $router->group(['prefix' => 'admin/product', 'middleware' => 'auth'], function ($router) {
@@ -54,6 +54,7 @@ $router->group(['prefix' => 'admin/product', 'middleware' => 'auth'], function (
         'as' => 'product.update',
         'uses' => 'Admin\ProductController@update'
     ]);
+    $router->get('/destroy/{id}','Admin\ProductController@destroy');
 
 });
 $router->group(['prefix' => 'admin/category', 'middleware' => 'auth'], function ($router) {
@@ -61,10 +62,12 @@ $router->group(['prefix' => 'admin/category', 'middleware' => 'auth'], function 
     $router->post('store', 'Admin\CategoryController@store');
     $router->get('show', 'Admin\CategoryController@show');
     $router->get('edit/{id}', 'Admin\CategoryController@edit');
+    $router->get('destroy/{id}','Admin\CategoryController@destroy');
     $router->patch('update/{id}', [
         'as' => 'category.update',
         'uses' => 'Admin\CategoryController@update'
     ]);
+
 
 });
 $router->group(['prefix' => 'admin'], function () use ($router) {
