@@ -274,7 +274,18 @@
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
-
+                    <li>
+                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Category<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="{{ URL::to('admin/category/create') }}">Add Category</a>
+                            </li>
+                            <li>
+                                <a href="{{ URL::to('admin/category/show') }}">List</a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
 
                 </ul>
             </div>
