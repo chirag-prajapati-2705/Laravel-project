@@ -1,15 +1,16 @@
 @extends('admin.layouts.app')
 
 @section('content')
+
         <div class="container">
             <div class="row">
                 <div class="panel-heading">
-                  <h1>Create New User</h1>
+                    <h1>Create New Product</h1>
                 </div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-6">
-                            {{Form::open(array('url' => 'admin/user/store')) }}
+                            {{ Form::model($product, array('method' => 'PATCH', 'route' => array('product.update', $product->id),'files' => true)) }}
                             {{ csrf_field() }}
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                 <label>Name</label>
@@ -20,33 +21,38 @@
                                     </span>
                                 @endif
                             </div>
-                            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                <label>Email</label>
-                                {{Form::input('text','email',Input::old('email'),['class'=>'form-control'])}}
-                                @if ($errors->has('email'))
+                            <div class="form-group{{ $errors->has('sku') ? ' has-error' : '' }}">
+                                <label>Sku</label>
+                                {{Form::input('text','sku',Input::old('sku'),['class'=>'form-control'])}}
+                                @if ($errors->has('sku'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                        <strong>{{ $errors->first('sku') }}</strong>
                                     </span>
                                 @endif
                             </div>
-                            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                <label>Password</label>
-                                {{Form::input('password','password','',['class'=>'form-control'])}}
-                                @if ($errors->has('password'))
+                            <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">
+                                <label>Image</label>
+                                {{ Form::file('image') }}
+                                @if(isset($product->image))
+                                   {{ Form::image('uploads/'.$product->image->image_name, null, ['class' => 'product-image'])}}
+                                    {{Form::hidden('image_id',$product->image->id)}}
+                                @endif
+                                @if ($errors->has('image'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
+                                        <strong>{{ $errors->first('image') }}</strong>
                                     </span>
                                 @endif
                             </div>
-                            <div class="form-group{{ $errors->has('confirm_password') ? ' has-error' : '' }}">
-                                <label>Confirm Password</label>
-                                {{Form::input('password','confirm_password','',['class'=>'form-control'])}}
-                                @if ($errors->has('confirm_password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('confirm_password') }}</strong>
-                                    </span>
-                                @endif
+                            <div class="form-group{{ $errors->has('price') ? ' has-error' : '' }}">
+                                <label>price</label>
+                                {{Form::input('text','price',Input::old('price'),['class'=>'form-control'])}}
                             </div>
+                            <div class="form-group">
+                                <label>Status</label>
+                                {{Form::select('status',array('1'=>'Active','2'=>'InActive'),'',['class'=>'form-control'])}}
+
+                            </div>
+
                             <button type="submit" class="btn btn-primary">Submit Button</button>
                             <button type="reset" class="btn btn-primary">Reset Button</button>
                             {{Form::close()}}

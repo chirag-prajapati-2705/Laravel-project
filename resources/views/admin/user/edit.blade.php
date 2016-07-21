@@ -4,12 +4,13 @@
         <div class="container">
             <div class="row">
                 <div class="panel-heading">
-                  <h1>Create New User</h1>
+                    <h1>Create New User</h1>
                 </div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-6">
-                            {{Form::open(array('url' => 'admin/user/store')) }}
+                            {{ Form::model($user, array('method' => 'PATCH', 'route' => array('user.update', $user->id))) }}
+
                             {{ csrf_field() }}
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                 <label>Name</label>
@@ -29,26 +30,9 @@
                                     </span>
                                 @endif
                             </div>
-                            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                <label>Password</label>
-                                {{Form::input('password','password','',['class'=>'form-control'])}}
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                            <div class="form-group{{ $errors->has('confirm_password') ? ' has-error' : '' }}">
-                                <label>Confirm Password</label>
-                                {{Form::input('password','confirm_password','',['class'=>'form-control'])}}
-                                @if ($errors->has('confirm_password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('confirm_password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
+
+
                             <button type="submit" class="btn btn-primary">Submit Button</button>
-                            <button type="reset" class="btn btn-primary">Reset Button</button>
                             {{Form::close()}}
                         </div>
                     </div>
@@ -59,4 +43,5 @@
                 <!-- /.col-lg-12 -->
             </div>
         </div>
+
 @endsection
