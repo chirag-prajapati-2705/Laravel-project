@@ -25,9 +25,10 @@
 Route::get('/login', function () {
     return  Redirect::route('admin/login');
 });
-Route::group(['middleware' => 'web'], function () {
+/*Route::group(['middleware' => 'web'], function () {
+
     // Route::auth();
-});
+});*/
 
 // admin/test
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
@@ -35,15 +36,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('user/create', 'Admin\UserController@create');
     Route::post('user/store', 'Admin\UserController@store');
     Route::get('user/show', 'Admin\UserController@show');
-
     // Password Reset Routes...
     Route::get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
     Route::post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
     Route::post('password/reset', 'Auth\PasswordController@reset');
-
-
-
-
 });
 $router->group(['prefix' => 'admin/product', 'middleware' => 'auth'], function ($router) {
     $router->get('create', 'Admin\ProductController@create');
@@ -55,7 +51,6 @@ $router->group(['prefix' => 'admin/product', 'middleware' => 'auth'], function (
         'uses' => 'Admin\ProductController@update'
     ]);
     $router->get('/destroy/{id}','Admin\ProductController@destroy');
-
 });
 $router->group(['prefix' => 'admin/category', 'middleware' => 'auth'], function ($router) {
     $router->get('create', 'Admin\CategoryController@create');
@@ -67,8 +62,6 @@ $router->group(['prefix' => 'admin/category', 'middleware' => 'auth'], function 
         'as' => 'category.update',
         'uses' => 'Admin\CategoryController@update'
     ]);
-
-
 });
 $router->group(['prefix' => 'admin'], function () use ($router) {
     $router->get('login', 'Auth\AuthController@getLogin')->name('get-admin-login');
@@ -96,11 +89,6 @@ Route::get('/{slug}', function ($slug) {
 });
 Route::get('register', 'RegistrationController@show')->name('registration');
 Route::post('register', 'RegistrationController@store')->name('register');
-Route::get('/{slug}', function () {
-    view('errors.404');
-});Route::get('/login', function () {
+Route::get('/login', function () {
     return redirect('admin/login');
-});
-Route::get('/{slug}', function () {
-    view('errors.404');
 });
