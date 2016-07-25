@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin;
+namespace App\Model;
 
 use App\Model\ProductImage;
 use Illuminate\Database\Eloquent\Model;
@@ -21,5 +21,9 @@ class Product extends  \Eloquent
 
       public function image() {
         return $this->hasOne(ProductImage::class,'product_id','id'); // this matches the Eloquent model
+    }
+
+    public function productCategory() {
+        return $this->hasMany(ProductCategory::class,'product_id','id'); // this matches the Eloquent model
     }
 }

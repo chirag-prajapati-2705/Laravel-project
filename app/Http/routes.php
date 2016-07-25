@@ -81,9 +81,7 @@ Route::get('/{slug}', function ($slug) {
         $app=app();
         $controller=$app->make('App\Http\Controllers\ProductController');
         return $controller->CallAction('index',[$slug]);
-    } else if (App\User::where('username', $slug)->count()) {
-        return 'User found';
-    } else {
+    }  else {
         return view('errors.404');
     }
 });

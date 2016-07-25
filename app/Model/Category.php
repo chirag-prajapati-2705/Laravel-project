@@ -6,7 +6,7 @@ class Category extends  \Eloquent
 {
     //
     protected $table='category';
-
+    protected $guarded = ['id'];
     /**
      * The attributes that are mass assignable.
      *
@@ -15,5 +15,16 @@ class Category extends  \Eloquent
     protected $fillable = [
         'category_name', 'url','description', 'status',
     ];
+
+
+    public function parent()
+    {
+        return $this->belongsTo(Category::class, 'parent_id');
+    }
+
+    public function children()
+    {
+        return $this->hasMany(Category::class, 'parent_id');
+    }
 
 }
