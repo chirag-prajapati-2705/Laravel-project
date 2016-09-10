@@ -77,7 +77,7 @@ Route::get('/login', function () {
     return redirect('admin/login');
 });
 Route::get('/{slug}', function ($slug) {
-    if (\App\Admin\Product::where('sku', $slug)->count()) {
+    if (\App\Model\Product::where('sku', $slug)->count()) {
         $app=app();
         $controller=$app->make('App\Http\Controllers\ProductController');
         return $controller->CallAction('index',[$slug]);

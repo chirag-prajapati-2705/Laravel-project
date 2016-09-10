@@ -37,7 +37,6 @@ class ProductController extends Controller
     public function create()
     {
         $categories=Category::all();
-        //dd($categories);
         return view('admin.product.create')->with('categories',$categories);
     }
 

@@ -53,10 +53,6 @@
                             <li category="<?php echo $category->id;?>" id="folder_<?php echo ++$key;?>">{{ $category->category_name }}
                                 @endif
                                 @if(count($category->children) >0)
-                                    <?php
-
-                                    //var_dump(count($category->children));
-                                    //dd($category->children); ?>
                                     @foreach ($category->children as $k=>$children)
                                         <ul>
                                             <li category="<?php echo $children->id;?>" id="child_<?php echo ++$k;?>">{{ $children->category_name }}</li>

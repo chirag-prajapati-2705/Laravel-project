@@ -29,7 +29,12 @@ class CategoryController extends Controller
 
     public function create()
     {
-        return view('admin.category.create');
+        $categories=Category::all();
+        foreach($categories as $category){
+            $category_list[$category->id]=$category->category_name;
+        }
+
+        return view('admin.category.create')->with('categories',$category_list);
     }
 
     public function store(Request $request)

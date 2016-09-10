@@ -1,8 +1,6 @@
 @extends('admin.layouts.app')
 
 @section('content')
-
-
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -22,6 +20,11 @@
                     <div class="form-group{{ $errors->has('url') ? ' has-error' : '' }}">
                         <label>Url</label>
                         {{Form::input('text','url',Input::old('url'),['class'=>'form-control'])}}
+                    </div>
+                    <div class="form-group">
+                        <label>Select Parent Category</label>
+                        {{Form::select('parent_category',$categories,'',['class'=>'form-control'])}}
+
                     </div>
                     <div class="form-group{{ $errors->has('price') ? ' has-error' : '' }}">
                         <label>Description</label>
