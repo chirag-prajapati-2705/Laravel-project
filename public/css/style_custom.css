@@ -6,3 +6,6 @@
 .alert{
     background: #66b74a;
 }
+.alert-danger{
+    background-color: #ebccd1 !important;
+}

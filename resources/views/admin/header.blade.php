@@ -14,9 +14,17 @@
     <link href="{{ URL::asset('css/timeline.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('css/morris.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('css/style_custom.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('css/jquery-ui.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 
+    <script src="{{ URL::asset('js/jquery.min.js') }}"></script>
+    <script src="{{ URL::asset('js/jstree.min.js') }}"></script>
+    <link  rel="stylesheet" href="{{ URL::asset('css/style.min.css') }}">
+    <script>
+        $(function () {
+
+        });
+    </script>
 </head>

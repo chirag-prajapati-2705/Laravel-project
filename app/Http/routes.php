@@ -25,9 +25,10 @@
 Route::get('/login', function () {
     return  Redirect::route('admin/login');
 });
-Route::group(['middleware' => 'web'], function () {
+/*Route::group(['middleware' => 'web'], function () {
+
     // Route::auth();
-});
+});*/
 
 // admin/test
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
@@ -35,20 +36,32 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('user/create', 'Admin\UserController@create');
     Route::post('user/store', 'Admin\UserController@store');
     Route::get('user/show', 'Admin\UserController@show');
-    Route::get('product/create', 'Admin\ProductController@create');
-    Route::post('product/store', 'Admin\ProductController@store');
-    Route::get('product/show', 'Admin\ProductController@show');
     // Password Reset Routes...
     Route::get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
     Route::post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
     Route::post('password/reset', 'Auth\PasswordController@reset');
-    Route::get('product/edit/{id}', 'Admin\ProductController@edit');
-    Route::patch('/product/update/{id}', [
+});
+$router->group(['prefix' => 'admin/product', 'middleware' => 'auth'], function ($router) {
+    $router->get('create', 'Admin\ProductController@create');
+    $router->post('store', 'Admin\ProductController@store');
+    $router->get('show', 'Admin\ProductController@show');
+    $router->get('edit/{id}', 'Admin\ProductController@edit');
+    $router->patch('update/{id}', [
         'as' => 'product.update',
         'uses' => 'Admin\ProductController@update'
     ]);
-    Route::put('/product/destroy/{id}','Admin\ProductController@destroy');
-
+    $router->get('/destroy/{id}','Admin\ProductController@destroy');
+});
+$router->group(['prefix' => 'admin/category', 'middleware' => 'auth'], function ($router) {
+    $router->get('create', 'Admin\CategoryController@create');
+    $router->post('store', 'Admin\CategoryController@store');
+    $router->get('show', 'Admin\CategoryController@show');
+    $router->get('edit/{id}', 'Admin\CategoryController@edit');
+    $router->get('destroy/{id}','Admin\CategoryController@destroy');
+    $router->patch('update/{id}', [
+        'as' => 'category.update',
+        'uses' => 'Admin\CategoryController@update'
+    ]);
 });
 $router->group(['prefix' => 'admin'], function () use ($router) {
     $router->get('login', 'Auth\AuthController@getLogin')->name('get-admin-login');
@@ -59,35 +72,21 @@ $router->group(['prefix' => 'admin'], function () use ($router) {
         Session::flash('success', 'successfull logout ');
         return redirect('/admin/login');
     });
-   
 });
 Route::get('/login', function () {
     return redirect('admin/login');
 });
 Route::get('/{slug}', function ($slug) {
-
-    if (\App\Admin\Product::where('sku', $slug)->count()) {
-        //Route::get('/{slug}','ProductController@index');
-        //return redirect(route('HomeController@index',$slug));
+    if (\App\Model\Product::where('sku', $slug)->count()) {
         $app=app();
         $controller=$app->make('App\Http\Controllers\ProductController');
         return $controller->CallAction('index',[$slug]);
-    } else if (App\User::where('username', $slug)->count()) {
-        // return redirect()->action('User\ProfileController@index', [$slug]);
-        // return App::make('App\Http\Controllers\User\ProfileController', [$slug])->index();
-        return 'User found';
-    } else {
+    }  else {
         return view('errors.404');
     }
-    //view('errors.404');
 });
 Route::get('register', 'RegistrationController@show')->name('registration');
 Route::post('register', 'RegistrationController@store')->name('register');
-Route::get('/{slug}', function () {
-    view('errors.404');
-});Route::get('/login', function () {
+Route::get('/login', function () {
     return redirect('admin/login');
-});
-Route::get('/{slug}', function () {
-    view('errors.404');
 });
