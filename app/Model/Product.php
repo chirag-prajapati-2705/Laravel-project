@@ -19,11 +19,15 @@ class Product extends  \Eloquent
         'name', 'sku','price', 'status',
     ];
 
-      public function image() {
+      public function image(){
         return $this->hasOne(ProductImage::class,'product_id','id'); // this matches the Eloquent model
     }
 
     public function productCategory() {
         return $this->hasMany(ProductCategory::class,'product_id','id'); // this matches the Eloquent model
+    }
+
+    public function getPrice($price,$prefix=true){
+        return ($prefix)?'$'.$price:$price;
     }
 }

@@ -9,3 +9,7 @@
 .alert-danger{
     background-color: #ebccd1 !important;
 }
+.logo-block img{
+    width:100px;
+    height:100%
+}

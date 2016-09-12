@@ -43,8 +43,6 @@ class ProductController extends Controller
     public function store(Request $request)
     {
 
-
-
         $rules = array(
             'name' => 'required',
             'sku' => 'required',
@@ -70,8 +68,7 @@ class ProductController extends Controller
             if($request->get('category_name')){
                 $this->saveCategory($request->get('category_name'),$product->id);
             }
-
-            Session::flash('success', 'Product successfully created!');
+           Session::flash('success', 'Product successfully created!');
             return Redirect('admin/product/show');
         }
     }

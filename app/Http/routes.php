@@ -25,10 +25,16 @@
 Route::get('/login', function () {
     return  Redirect::route('admin/login');
 });
-/*Route::group(['middleware' => 'web'], function () {
-
+Route::get('/', function () {
+    return redirect('/admin/dashboard');
+});
+Route::group(['middleware' => 'web'], function () {
+     //   Route::get('payPremium', ['as'=>'payPremium','uses'=>'PaypalController@payPremium']);
+        Route::post('getCheckout', ['as'=>'getCheckout','uses'=>'PaypalController@getCheckout']);
+        Route::get('getDone', ['as'=>'getDone','uses'=>'PaypalController@getDone']);
+        Route::get('getCancel', ['as'=>'getCancel','uses'=>'PaypalController@getCancel']);
     // Route::auth();
-});*/
+});
 
 // admin/test
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
@@ -76,6 +82,7 @@ $router->group(['prefix' => 'admin'], function () use ($router) {
 Route::get('/login', function () {
     return redirect('admin/login');
 });
+Route::any('payment/store-payment','PayPalController@getCheckout');
 Route::get('/{slug}', function ($slug) {
     if (\App\Model\Product::where('sku', $slug)->count()) {
         $app=app();

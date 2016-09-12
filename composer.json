@@ -9,7 +9,8 @@
         "laravel/framework": "5.2.*",
         "laravelcollective/html":"5.2.*",
         "barryvdh/laravel-ide-helper": "^2.1",
-        "intervention/image": "dev-master"
+        "intervention/image": "dev-master",
+        "netshell/paypal": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

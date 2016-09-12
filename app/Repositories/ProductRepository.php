@@ -8,7 +8,7 @@
 namespace App\Repositories;
 
 use App\Interfaces\ProductRepositoryInterface;
-use App\Admin\Product;
+use App\Model\Product;
 use App\Model\ProductImage;
 
 Class ProductRepository implements ProductRepositoryInterface
