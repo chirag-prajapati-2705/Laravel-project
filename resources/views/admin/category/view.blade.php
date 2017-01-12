@@ -32,12 +32,12 @@
                                         <td>{{$category->url}}</td>
                                         <td>{{($category->status==1)?'Active':"Inactive"}}</td>
                                         <td><a class="btn btn-danger btn-xs btn btn-xs btn-danger delete-btn"
-                                               href="{!! URL('admin/category/edit/'.$category->id) !!}">
+                                               href="{!! URL('admin/category/edit/'.$category->category_id) !!}">
                                                 <i class="fa fa-pencil" title="" data-placement="top"
                                                    data-toggle="tooltip"
                                                    data-original-title="Delete"></i>
                                             </a> <a class="btn btn-danger btn-xs btn btn-xs btn-danger delete-btn"
-                                                    href="{!! URL('admin/category/destroy', $category->id) !!}">
+                                                    href="{!! URL('admin/category/destroy', $category->category_id) !!}">
                                                 <i class="fa fa-trash" title="" data-placement="top"
                                                    data-toggle="tooltip"
                                                    data-original-title="Delete"></i>

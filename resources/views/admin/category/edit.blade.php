@@ -8,7 +8,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-6">
-                            {{ Form::model($category, array('method' => 'PATCH', 'route' => array('category.update', $category->id),'files' => true)) }}
+                            {{ Form::model($category, array('method' => 'PATCH', 'route' => array('category.update', $category->category_id),'files' => true)) }}
                             {{ csrf_field() }}
                             <div class="form-group{{ $errors->has('category_name') ? ' has-error' : '' }}">
                                 <label>Name</label>

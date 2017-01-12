@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('content')
-    <div id="tabs">
+    <div category_id="tabs">
         <ul>
             <li><a href="#general">General</a></li>
             <li><a href="#category">Category</a></li>
@@ -10,8 +10,8 @@
         <div id="general">
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-lg-6">
-                        {{ Form::model($product, array('method' => 'PATCH', 'route' => array('product.update', $product->id),'files' => true)) }}
+                    <div class="col-lg-6">category_id
+                        {{ Form::model($product, array('method' => 'PATCH', 'route' => array('product.update', $product->product_id),'files' => true)) }}
                         {{ csrf_field() }}
                         <input type="hidden" name="category_name" id="category_name" value="{{ implode(',',$product_category).',' }}">
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -58,7 +58,6 @@
                     </div>
                 </div>
                 <!-- /.row (nested) -->
-
                 <!-- /.panel -->
             </div>
         </div>
@@ -71,11 +70,11 @@
 
                                 <?php
                                 $checked="unchecked";
-                                if (in_array($category->id, $product_category)) {
+                                if (in_array($category->category_id, $product_category)) {
                                     $checked="checked";
                                 }
                                 ?>
-                                <li data-checkstate="{{$checked}}" category="<?php echo $category->id;?>"
+                                <li data-checkstate="{{$checked}}" category="<?php echo $category->category_id;?>"
                                     id="folder_<?php echo ++$key;?>">{{ $category->category_name }}
                                     @endif
                                     @if(count($category->children) >0)

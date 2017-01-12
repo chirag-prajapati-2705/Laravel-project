@@ -7,6 +7,7 @@ class Category extends  \Eloquent
     //
     protected $table='category';
     protected $guarded = ['id'];
+    protected $primaryKey = 'category_id';
     /**
      * The attributes that are mass assignable.
      *
