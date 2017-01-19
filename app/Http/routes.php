@@ -76,6 +76,11 @@ $router->group(['prefix' => 'admin'], function () use ($router) {
 Route::get('/login', function () {
     return redirect('admin/login');
 });
+Route::get('register', 'RegistrationController@show')->name('registration');
+Route::post('register', 'RegistrationController@store')->name('register');
+Route::get('/login', function () {
+    return redirect('admin/login');
+});
 Route::get('/{slug}', function ($slug) {
     if (\App\Model\Product::where('sku', $slug)->count()) {
         $app=app();
@@ -84,9 +89,4 @@ Route::get('/{slug}', function ($slug) {
     }  else {
         return view('errors.404');
     }
-});
-Route::get('register', 'RegistrationController@show')->name('registration');
-Route::post('register', 'RegistrationController@store')->name('register');
-Route::get('/login', function () {
-    return redirect('admin/login');
 });
