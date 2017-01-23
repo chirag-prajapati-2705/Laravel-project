@@ -20,7 +20,7 @@ use App\Service\UploadService;
 class ProductController extends Controller
 {
 
-    const RESZE_IMAGE_WIDTH = '200';
+    const RESIZE_IMAGE_WIDTH = '200';
 
     protected $image_service;
 
@@ -37,8 +37,6 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-
-
         $rules = array(
             'name' => 'required',
             'sku' => 'required',
@@ -49,20 +47,20 @@ class ProductController extends Controller
         if ($validator->fails()) {
             return Redirect::to('admin/product/create')->withInput()->withErrors($validator);
         } else {
+
             $product = New Product();
             $product->fill($request->all());
             $product->save();
             if (Input::hasFile('image')) {
                 $file = Input::file('image');
-                $image_name = $this->image_service->upload($file, self::RESZE_IMAGE_WIDTH, true);
+                $image_name = $this->image_service->upload($file, self::RESIZE_IMAGE_WIDTH, true);
                 $product_image = New ProductImage();
                 $product_image->product_id = $product->product_id;
                 $product_image->image_name = $image_name;
                 $product_image->save();
             }
-
             if ($request->get('category_name')) {
-                $this->saveCategory($request->get('category_name'), $product->id);
+                $this->saveCategory($request->get('category_name'), $product->product_id);
             }
 
             Session::flash('success', 'Product successfully created!');
@@ -73,6 +71,7 @@ class ProductController extends Controller
     public function edit($product_id, Request $request)
     {
         $product = Product::find($product_id);
+        //dd($product->image);
         $categories = Category::all();
         $product_category = $this->getCategoryList($product->productCategory);
         return view('admin.product.edit', compact('product'))->with('categories', $categories)->with('product_category', $product_category);
@@ -123,7 +122,6 @@ class ProductController extends Controller
 
     public function saveCategory($category_id, $product_id)
     {
-
         $category_ids = explode(',', trim($category_id, ','));
         $category_ids = array_unique($category_ids);
         DB::table('product_category')->where('product_id', '=', $product_id)->delete();

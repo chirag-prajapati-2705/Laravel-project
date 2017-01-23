@@ -286,6 +286,18 @@
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
+                    <li>
+                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Banner<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="{{ URL::to('admin/banner/create') }}">Add Banner</a>
+                            </li>
+                            <li>
+                                <a href="{{ URL::to('admin/banner') }}">List</a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
 
                 </ul>
             </div>

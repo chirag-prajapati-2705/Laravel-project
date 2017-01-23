@@ -52,6 +52,11 @@ $router->group(['prefix' => 'admin/product', 'middleware' => 'auth'], function (
     ]);
     $router->get('/destroy/{id}','Admin\ProductController@destroy');
 });
+$router->group(['prefix' => 'admin', 'middleware' => 'auth'], function ($router) {
+    Route::resource('banner', 'Admin\BannerController');
+});
+
+
 $router->group(['prefix' => 'admin/category', 'middleware' => 'auth'], function ($router) {
     $router->get('create', 'Admin\CategoryController@create');
     $router->post('store', 'Admin\CategoryController@store');
@@ -76,6 +81,11 @@ $router->group(['prefix' => 'admin'], function () use ($router) {
 Route::get('/login', function () {
     return redirect('admin/login');
 });
+Route::get('register', 'RegistrationController@show')->name('registration');
+Route::post('register', 'RegistrationController@store')->name('register');
+Route::get('/login', function () {
+    return redirect('admin/login');
+});
 Route::get('/{slug}', function ($slug) {
     if (\App\Model\Product::where('sku', $slug)->count()) {
         $app=app();
@@ -84,9 +94,4 @@ Route::get('/{slug}', function ($slug) {
     }  else {
         return view('errors.404');
     }
-});
-Route::get('register', 'RegistrationController@show')->name('registration');
-Route::post('register', 'RegistrationController@store')->name('register');
-Route::get('/login', function () {
-    return redirect('admin/login');
 });
