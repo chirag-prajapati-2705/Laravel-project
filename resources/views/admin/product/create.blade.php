@@ -14,7 +14,8 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-6">
-<input type="hidden" name="category_name" id="category_name" value="">
+                        <input type="hidden" name="category_name" id="category_name" value="">
+
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label>Name</label>
                             {{Form::input('text','name',Input::old('name'),['class'=>'form-control'])}}
@@ -34,15 +35,9 @@
                         <div class="form-group">
                             <label>Status</label>
                             {{Form::select('status',array('1'=>'Active','2'=>'InActive'),'',['class'=>'form-control'])}}
-
                         </div>
-
-
                     </div>
                 </div>
-                <!-- /.row (nested) -->
-
-                <!-- /.panel -->
             </div>
         </div>
         <div id="category">
@@ -50,12 +45,14 @@
                 @foreach ($categories as $key=>$category)
                     @if($category->parent_id==0)
                         <ul>
-                            <li category="<?php echo $category->id;?>" id="folder_<?php echo ++$key;?>">{{ $category->category_name }}
+                            <li category="<?php echo $category->category_id;?>"
+                                id="folder_<?php echo ++$key;?>">{{ $category->category_name }}
                                 @endif
                                 @if(count($category->children) >0)
                                     @foreach ($category->children as $k=>$children)
                                         <ul>
-                                            <li category="<?php echo $children->id;?>" id="child_<?php echo ++$k;?>">{{ $children->category_name }}</li>
+                                            <li category="<?php echo $children->category_id;?>"
+                                                id="child_<?php echo ++$k;?>">{{ $children->category_name }}</li>
                                         </ul>
                                     @endforeach
                                 @endif
@@ -63,7 +60,7 @@
                         </ul>
                         @endforeach
             </div>
-    </div>
+        </div>
     </div>
     <div class="" style="margin-top:15px;">
         <button type="submit" class="btn btn-primary">Submit Button</button>

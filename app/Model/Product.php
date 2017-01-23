@@ -21,7 +21,7 @@ class Product extends  \Eloquent
     ];
 
       public function image() {
-        return $this->hasOne(ProductImage::class,'product_id','id'); // this matches the Eloquent model
+        return $this->hasOne(ProductImage::class,'product_id','product_id'); // this matches the Eloquent model
     }
 
     public function productCategory() {

@@ -52,6 +52,11 @@ $router->group(['prefix' => 'admin/product', 'middleware' => 'auth'], function (
     ]);
     $router->get('/destroy/{id}','Admin\ProductController@destroy');
 });
+$router->group(['prefix' => 'admin', 'middleware' => 'auth'], function ($router) {
+    Route::resource('banner', 'Admin\BannerController');
+});
+
+
 $router->group(['prefix' => 'admin/category', 'middleware' => 'auth'], function ($router) {
     $router->get('create', 'Admin\CategoryController@create');
     $router->post('store', 'Admin\CategoryController@store');
