@@ -19,7 +19,7 @@ class ComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->app['view']->composer(['errors.404', 'layouts.master','home.index'], function ($view) {
+        $this->app['view']->composer(['errors.404','home.index','footer'], function ($view) {
             $categories=$this->app->make('App\Interfaces\CategoryRepositoryInterface')->getAllCategory();
             $banners=$this->app->make('App\Interfaces\BannerRepositoryInterface')->getAllBanner();
             $products=$this->app->make('App\Interfaces\ProductRepositoryInterface')->getAllProducts();

@@ -29,7 +29,7 @@ Route::get('/login', function () {
 
     // Route::auth();
 });*/
-
+Route::get('/', "HomeController@index");
 // admin/test
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('dashboard', 'Admin\HomeController@index');

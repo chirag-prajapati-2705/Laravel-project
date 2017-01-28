@@ -14,19 +14,18 @@
 
             <div class="content-top1">
                 @foreach($products as $product)
+
                     <div class="col-md-3 col-md2">
                         <div class="col-md1 simpleCart_shelfItem">
-                            <a href="single.html">
+                            <a href="{{URL::to($product->sku)}}">
                                 <img class="img-responsive"
                                      src="{{ URL::asset('uploads/'.$product->image->image_name)}}" alt=""/>
                             </a>
 
-                            <h3><a href="single.html">{{$product->name}}</a></h3>
+                            <h3><a href="{{URL::to($product->sku)}}">{{$product->name}}</a></h3>
 
                             <div class="price">
                                 <h5 class="item_price">${{$product->price}}</h5>
-                                <a href="#" class="item_add">Add To Cart</a>
-
                                 <div class="clearfix"></div>
                             </div>
                         </div>

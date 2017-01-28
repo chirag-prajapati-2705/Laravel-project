@@ -22,7 +22,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             $(".memenu").memenu();
         });</script>
     <script src="{{ URL::asset('front/js/simpleCart.min.js')}}"></script>
-    <!-- slide -->
     <script src="{{ URL::asset('front/js/responsiveslides.min.js')}}"></script>
     <script>
         $(function () {
@@ -250,30 +249,5 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
     </div>
 </div>
-<!--banner-->
-<div class="banner">
-    <div class="col-sm-3 banner-mat">
-        <img class="img-responsive" src="{{ URL::asset('front/images/ba1.jpg')}}" alt="">
-    </div>
-    <div class="col-sm-6 matter-banner">
-        <div class="slider">
-            <div class="callbacks_container">
-                <ul class="rslides" id="slider">
-                    @foreach($banners as $banner)
-                            <li>
-                            <img src="{{ URL::asset('uploads/'.$banner->image)}}" alt="">
-                        </li>
-                    @endforeach
-
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-3 banner-mat">
-        <img class="img-responsive" src="{{ URL::asset('front/images/ba.jpg')}}" alt="">
-    </div>
-    <div class="clearfix"></div>
-</div>
-<!--//banner-->
-@include("home.recent",['products'=>$products])
+@yield('content')
 @include('footer');
