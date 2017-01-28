@@ -216,11 +216,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
             <div class="clearfix"></div>
             <!---pop-up-box---->
-            <script type="text/javascript" src="js/modernizr.custom.min.js"></script>
-            <link href="css/popuo-box.css" rel="stylesheet" type="text/css" media="all"/>
-            <script src="js/jquery.magnific-popup.js" type="text/javascript"></script>
+            <script type="text/javascript" src="{{ URL::asset('front/js/modernizr.custom.min.js') }}"></script>
+            <link href="{{ URL::asset('front/css/popuo-box.css') }}" rel="stylesheet" type="text/css" media="all"/>
+            <script src="{{ URL::asset('front/js/jquery.magnific-popup.js') }}" type="text/javascript"></script>
             <!---//pop-up-box---->
-            {{--<div id="small-dialog" class="mfp-hide">
+            <div id="small-dialog" class="mfp-hide">
                 <div class="search-top">
                     <div class="login">
                         <input type="submit" value="">
@@ -229,7 +229,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </div>
                     <p> Shopping</p>
                 </div>
-            </div>--}}
+            </div>
             <script>
                 $(document).ready(function () {
                     $('.popup-with-zoom-anim').magnificPopup({
@@ -275,5 +275,5 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="clearfix"></div>
 </div>
 <!--//banner-->
-@include("home.recent")
+@include("home.recent",['products'=>$products])
 @include('footer');

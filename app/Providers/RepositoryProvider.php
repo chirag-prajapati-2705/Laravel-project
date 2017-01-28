@@ -10,6 +10,7 @@ namespace App\Providers;
 
 use App\Repositories\BannerRepository;
 use App\Repositories\CategoryRepository;
+use App\Repositories\ProductRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryProvider extends ServiceProvider
@@ -26,6 +27,9 @@ class RepositoryProvider extends ServiceProvider
         });
         $this->app->bind('App\Interfaces\BannerRepositoryInterface', function ($app) {
             return new BannerRepository();
+        });
+        $this->app->bind('App\Interfaces\ProductRepositoryInterface', function ($app) {
+            return new ProductRepository();
         });
     }
 }

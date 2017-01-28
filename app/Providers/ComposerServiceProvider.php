@@ -22,8 +22,10 @@ class ComposerServiceProvider extends ServiceProvider
         $this->app['view']->composer(['errors.404', 'layouts.master','home.index'], function ($view) {
             $categories=$this->app->make('App\Interfaces\CategoryRepositoryInterface')->getAllCategory();
             $banners=$this->app->make('App\Interfaces\BannerRepositoryInterface')->getAllBanner();
+            $products=$this->app->make('App\Interfaces\ProductRepositoryInterface')->getAllProducts();
             $view->with('categories',$categories)
-                 ->with('banners',$banners);
+                 ->with('banners',$banners)
+                 ->with('products',$products);
         });
     }
 

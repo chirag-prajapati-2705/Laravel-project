@@ -109,7 +109,7 @@ class ProductController extends Controller
             $product->save();
             if (Input::hasFile('image')) {
                 $file = Input::file('image');
-                $image_name = $this->image_service->upload($file, self::RESZE_IMAGE_WIDTH, true);
+                $image_name = $this->image_service->upload($file, self::RESIZE_IMAGE_WIDTH, true);
                 $this->saveImage(Input::get('image_id'), $product_id, $image_name);
             }
             if ($request->get('category_name')) {
