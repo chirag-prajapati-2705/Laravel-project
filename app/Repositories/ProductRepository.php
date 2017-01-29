@@ -8,7 +8,7 @@
 namespace App\Repositories;
 
 use App\Interfaces\ProductRepositoryInterface;
-use App\Admin\Product;
+use App\Model\Product;
 use App\Model\ProductImage;
 
 Class ProductRepository implements ProductRepositoryInterface
@@ -17,6 +17,11 @@ Class ProductRepository implements ProductRepositoryInterface
     {
         $product = Product::where('sku', $slug)->first();
         return $product;
+    }
+
+    public function getAllProducts()
+    {
+        return Product::all();
     }
 
 

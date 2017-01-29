@@ -29,7 +29,7 @@ Route::get('/login', function () {
 
     // Route::auth();
 });*/
-
+Route::get('/', "HomeController@index");
 // admin/test
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('dashboard', 'Admin\HomeController@index');
@@ -55,8 +55,6 @@ $router->group(['prefix' => 'admin/product', 'middleware' => 'auth'], function (
 $router->group(['prefix' => 'admin', 'middleware' => 'auth'], function ($router) {
     Route::resource('banner', 'Admin\BannerController');
 });
-
-
 $router->group(['prefix' => 'admin/category', 'middleware' => 'auth'], function ($router) {
     $router->get('create', 'Admin\CategoryController@create');
     $router->post('store', 'Admin\CategoryController@store');
