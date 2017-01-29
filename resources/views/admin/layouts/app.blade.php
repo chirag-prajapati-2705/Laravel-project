@@ -281,7 +281,7 @@
                                 <a href="{{ URL::to('admin/category/create') }}">Add Category</a>
                             </li>
                             <li>
-                                <a href="{{ URL::to('admin/category/show') }}">List</a>
+                                <a href="{{ URL::to('admin/category') }}">List</a>
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->

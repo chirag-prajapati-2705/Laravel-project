@@ -31,17 +31,15 @@
                                         <td>{{$category->category_name}}</td>
                                         <td>{{$category->url}}</td>
                                         <td>{{($category->status==1)?'Active':"Inactive"}}</td>
-                                        <td><a class="btn btn-danger btn-xs btn btn-xs btn-danger delete-btn"
-                                               href="{!! URL('admin/category/edit/'.$category->category_id) !!}">
-                                                <i class="fa fa-pencil" title="" data-placement="top"
-                                                   data-toggle="tooltip"
-                                                   data-original-title="Delete"></i>
-                                            </a> <a class="btn btn-danger btn-xs btn btn-xs btn-danger delete-btn"
-                                                    href="{!! URL('admin/category/destroy', $category->category_id) !!}">
-                                                <i class="fa fa-trash" title="" data-placement="top"
-                                                   data-toggle="tooltip"
-                                                   data-original-title="Delete"></i>
-                                            </a></td>
+                                        <td><a class="btn btn-primary"
+                                               href="{!! URL('admin/category/'.$category->category_id.'/edit/') !!}">
+                                                Edit
+                                            </a>
+
+                                            {{ Form::open(['method' => 'DELETE','route' => ['admin.category.destroy',$category->category_id],'style'=>'display:inline']) }}
+                                            {{ Form::submit('Delete', ['class' => 'btn btn-danger']) }}
+                                            {{ Form::close() }}
+                                        </td>
                                     </tr>
                                 @endforeach
                             @else
