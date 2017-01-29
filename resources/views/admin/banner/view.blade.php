@@ -30,18 +30,14 @@
                                     <tr class="odd gradeX">
                                         <td>{{$banner->banner_id}}</td>
                                         <td>{{$banner->image}}</td>
-                                        <td><a class="btn btn-danger btn-xs btn btn-xs btn-danger delete-btn"
+                                        <td><a class="btn btn-primary"
                                                href="{{ URL::to('admin/banner/' . $banner->banner_id . '/edit') }}">
-
-                                                <i class="fa fa-pencil" title="" data-placement="top"
-                                                   data-toggle="tooltip"
-                                                   data-original-title="Delete"></i>
-                                            </a> <a class="btn btn-danger btn-xs btn btn-xs btn-danger delete-btn"
-                                                    href="{!! URL('admin/banner/destroy', $banner->banner_id) !!}">
-                                                <i class="fa fa-trash" title="" data-placement="top"
-                                                   data-toggle="tooltip"
-                                                   data-original-title="Delete"></i>
-                                            </a></td>
+                                                Edit
+                                            </a>
+                                            {{ Form::open(['method' => 'DELETE','route' => ['admin.banner.destroy',$banner->banner_id],'style'=>'display:inline']) }}
+                                            {{ Form::submit('Delete', ['class' => 'btn btn-danger']) }}
+                                            {{ Form::close() }}
+                                        </td>
                                     </tr>
                                 @endforeach
                             @else
