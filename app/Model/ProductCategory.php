@@ -1,0 +1,25 @@
+<?php
+
+namespace App\Model;
+
+
+use Illuminate\Database\Eloquent\Model;
+
+class ProductCategory extends  \Eloquent
+{
+    //
+    protected $table='product_category';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public $timestamps = false;
+
+    protected $fillable = [
+        'product_id', 'category_id'
+    ];
+
+
+}

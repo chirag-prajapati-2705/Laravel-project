@@ -1,8 +1,6 @@
 @extends('admin.layouts.app')
 
 @section('content')
-
-    <div id="page-wrapper">
         <div class="container">
             <div class="row">
                 <div class="panel-heading">
@@ -61,7 +59,4 @@
                 <!-- /.col-lg-12 -->
             </div>
         </div>
-
-
-    </div>
 @endsection
