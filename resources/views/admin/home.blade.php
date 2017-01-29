@@ -541,6 +541,4 @@
         </div>
         <!-- /.row -->
     <!-- /#page-wrapper -->
-
-
    @endsection
