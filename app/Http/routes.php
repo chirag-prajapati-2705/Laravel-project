@@ -75,11 +75,14 @@ Route::get('/login', function () {
     return redirect('admin/login');
 });
 Route::get('/{slug}', function ($slug) {
+    $app=app();
     if (\App\Model\Product::where('sku', $slug)->count()) {
-        $app=app();
         $controller=$app->make('App\Http\Controllers\ProductController');
         return $controller->CallAction('index',[$slug]);
-    }  else {
+    } elseif (\App\Model\Category::where('url', $slug)->count()) {
+        $controller=$app->make('App\Http\Controllers\CategoryController');
+        return $controller->CallAction('index',[$slug]);
+    } else {
         return view('errors.404');
     }
 });
