@@ -19,10 +19,10 @@ Class CategoryRepository implements CategoryRepositoryInterface
     }
 
     public function getByCategory($category){
+
          return $category->products()->with('image')->get()  ;
     }
     public function getAllCategory(){
         return Category::all();
     }
-
 }
