@@ -127,7 +127,7 @@ class BannerController extends Controller
         $delete_product = Banner::destroy($id);
         if ($delete_product) {
             Session::flash('success', 'Banner successfully deleted!');
-            return Redirect('admin/banner/index');
+            return Redirect('admin/banner');
         }
     }
 

@@ -2,6 +2,8 @@
 
 namespace App\Model;
 
+use App\Repositories\CategoryRepository;
+
 class Category extends  \Eloquent
 {
     //
@@ -26,6 +28,10 @@ class Category extends  \Eloquent
     public function children()
     {
         return $this->hasMany(Category::class, 'parent_id');
+    }
+
+    public function products(){
+        return $this->belongsToMany(Product::class,'product_category');
     }
 
 }

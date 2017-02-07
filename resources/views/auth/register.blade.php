@@ -1,82 +1,64 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Register</div>
-                <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('register') }}">
-                        {!! csrf_field() !!}
+    <div class="container">
+        <div class="register">
+            <h1>Register</h1>
 
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Name</label>
+            <form class="form-horizontal" role="form" method="POST" action="{{ url('register') }}">
+                {!! csrf_field() !!}
+                <div class="col-md-6  register-top-grid">
 
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" name="name" value="{{ old('name') }}">
-
-                                @if ($errors->has('name'))
-                                    <span class="help-block">
+                    <div class="mation">
+                        <span>First Name</span>
+                        <input type="text" class="form-control" name="name" value="{{ old('name') }}">
+                        @if ($errors->has('name'))
+                            <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>
                                     </span>
-                                @endif
-                            </div>
-                        </div>
+                        @endif
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">E-Mail Address</label>
+                      {{--  <span>Last Name</span>
+                        <input type="text" class="form-control" name="last_name" value="{{ old('last_name') }}">--}}
 
-                            <div class="col-md-6">
-                                <input type="email" class="form-control" name="email" value="{{ old('email') }}">
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
+                        <span>Email Address</span>
+                        <input type="email" class="form-control" name="email" value="{{ old('email') }}">
+                        @if ($errors->has('email'))
+                            <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input type="password" class="form-control" name="password">
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
+                        @endif
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class=" col-md-6 register-bottom-grid">
+                    <div class="mation">
+                        <span>Password</span>
+                        <input type="password" class="form-control" name="password">
+                        @if ($errors->has('password'))
+                            <span class="help-block">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Confirm Password</label>
-
-                            <div class="col-md-6">
-                                <input type="password" class="form-control" name="password_confirmation">
-
-                                @if ($errors->has('password_confirmation'))
-                                    <span class="help-block">
+                        @endif
+                        <span>Confirm Password</span>
+                        <input type="password" class="form-control" name="password_confirmation">
+                        @if ($errors->has('password_confirmation'))
+                            <span class="help-block">
                                         <strong>{{ $errors->first('password_confirmation') }}</strong>
                                     </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-btn fa-user"></i>Register
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                        @endif
+                    </div>
                 </div>
-            </div>
+                <div class="clearfix"></div>
+
+
+                <div class="register-but">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-btn fa-user"></i>Register
+                    </button>
+                    <div class="clearfix"></div>
+                </div>
+            </form>
         </div>
     </div>
-</div>
 @endsection

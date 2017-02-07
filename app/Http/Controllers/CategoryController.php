@@ -16,9 +16,8 @@ class CategoryController extends Controller
     }
     public function index($slug){
         $category=$this->category_repository->getById($slug);
-
         $products=$this->category_repository->getByCategory($category);
-        //dd($product);
+
         return view('category.index')->with('category',$category)->with('products',$products);
     }
 }

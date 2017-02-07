@@ -11,7 +11,7 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-lg-6">
-                    {{Form::open(array('url' => 'admin/category/store','files' => true)) }}
+                    {{Form::open(array('url' => 'admin/category','files' => true)) }}
                     {{ csrf_field() }}
                     <div class="form-group{{ $errors->has('category_name') ? ' has-error' : '' }}">
                         <label>Name</label>
