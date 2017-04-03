@@ -22,6 +22,7 @@
 | kernel and includes session state, CSRF protection, and more.
 |
 */
+
 Route::get('/login', function () {
     return  Redirect::route('admin/login');
 });
