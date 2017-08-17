@@ -25,13 +25,30 @@
 Route::get('/login', function () {
     return  Redirect::route('admin/login');
 });
-/*Route::group(['middleware' => 'web'], function () {
-
+Route::get('/', function () {
+    return redirect('/admin/dashboard');
+});
+Route::group(['middleware' => 'web'], function () {
+     //   Route::get('payPremium', ['as'=>'payPremium','uses'=>'PaypalController@payPremium']);
+        Route::post('getCheckout', ['as'=>'getCheckout','uses'=>'PaypalController@getCheckout']);
+        Route::get('getDone', ['as'=>'getDone','uses'=>'PaypalController@getDone']);
+        Route::get('getCancel', ['as'=>'getCancel','uses'=>'PaypalController@getCancel']);
     // Route::auth();
-});*/
+});
 Route::get('/', "HomeController@index");
+
 // admin/test
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
+    Route::get('/admin/login','AdminAuth\AuthController@showLoginForm');
+    Route::post('/admin/login','AdminAuth\AuthController@login');
+    Route::get('/admin/logout','AdminAuth\AuthController@logout');
+
+    // Registration Routes...
+    Route::get('admin/register', 'AdminAuth\AuthController@showRegistrationForm');
+    Route::post('admin/register', 'AdminAuth\AuthController@register');
+    Route::get('/admin', 'AdminController@index');
+
+
     Route::get('dashboard', 'Admin\HomeController@index');
     Route::get('user/create', 'Admin\UserController@create');
     Route::post('user/store', 'Admin\UserController@store');
@@ -57,8 +74,8 @@ $router->group(['prefix' => 'admin', 'middleware' => 'auth'], function ($router)
     Route::resource('category', 'Admin\CategoryController');
 });
 $router->group(['prefix' => 'admin'], function () use ($router) {
-    $router->get('login', 'Auth\AuthController@getLogin')->name('get-admin-login');
-    $router->post('login', 'Auth\AuthController@postLogin')->name('post-admin-login');
+    $router->get('login', 'Auth\AdminAuth\AuthController@getLogin')->name('get-admin-login');
+    $router->post('login', 'Auth\AdminAuth\AuthController@postLogin')->name('post-admin-login');
     $router->get('logout', function () {
         Auth::logout();
         session()->flush();
@@ -69,6 +86,7 @@ $router->group(['prefix' => 'admin'], function () use ($router) {
 Route::get('/login', function () {
     return redirect('admin/login');
 });
+Route::any('payment/store-payment','PayPalController@getCheckout');
 Route::get('register', 'RegistrationController@show')->name('registration');
 Route::post('register', 'RegistrationController@store')->name('register');
 Route::get('/login', function () {
