@@ -35,12 +35,12 @@
                                         <td>{{'$'.$product->price}}</td>
                                         <td>{{($product->status==1)?'Active':"Inactive"}}</td>
                                         <td><a class="btn btn-danger btn-xs btn btn-xs btn-danger delete-btn"
-                                               href="{!! URL('admin/product/edit/'.$product->id) !!}">
+                                               href="{!! URL('admin/product/edit/'.$product->product_id) !!}">
                                                 <i class="fa fa-pencil" title="" data-placement="top"
                                                    data-toggle="tooltip"
                                                    data-original-title="Delete"></i>
                                             </a> <a class="btn btn-danger btn-xs btn btn-xs btn-danger delete-btn"
-                                                    href="{!! URL('admin/product/destroy', $product->id) !!}">
+                                                    href="{!! URL('admin/product/destroy', $product->product_id) !!}">
                                                 <i class="fa fa-trash" title="" data-placement="top"
                                                    data-toggle="tooltip"
                                                    data-original-title="Delete"></i>

@@ -5,13 +5,12 @@
         <ul>
             <li><a href="#general">General</a></li>
             <li><a href="#category">Category</a></li>
-            {{--<li><a href="#tabs-3">Aenean lacinia</a></li>--}}
         </ul>
         <div id="general">
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-6">
-                        {{ Form::model($product, array('method' => 'PATCH', 'route' => array('product.update', $product->id),'files' => true)) }}
+                        {{ Form::model($product, array('method' => 'PATCH', 'route' => array('product.update', $product->product_id),'files' => true)) }}
                         {{ csrf_field() }}
                         <input type="hidden" name="category_name" id="category_name" value="{{ implode(',',$product_category).',' }}">
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -36,8 +35,9 @@
                             <label>Image</label>
                             {{ Form::file('image') }}
                             @if(isset($product->image))
+
                                 {{ Form::image('uploads/'.$product->image->image_name, null, ['class' => 'product-image'])}}
-                                {{Form::hidden('image_id',$product->image->id)}}
+                                 {{Form::hidden('image_id',$product->image->id)}}
                             @endif
                             @if ($errors->has('image'))
                                 <span class="help-block">
@@ -58,7 +58,6 @@
                     </div>
                 </div>
                 <!-- /.row (nested) -->
-
                 <!-- /.panel -->
             </div>
         </div>
@@ -71,23 +70,23 @@
 
                                 <?php
                                 $checked="unchecked";
-                                if (in_array($category->id, $product_category)) {
+                                if (in_array($category->category_id, $product_category)) {
                                     $checked="checked";
                                 }
                                 ?>
-                                <li data-checkstate="{{$checked}}" category="<?php echo $category->id;?>"
+                                <li data-checkstate="{{$checked}}" category="<?php echo $category->category_id;?>"
                                     id="folder_<?php echo ++$key;?>">{{ $category->category_name }}
                                     @endif
                                     @if(count($category->children) >0)
                                         @foreach ($category->children as $k=>$children)
                                             <?php
                                             $child_checked="unchecked";
-                                            if (in_array($children->id, $product_category)) {
+                                            if (in_array($children->category_id, $product_category)) {
                                                 $child_checked="checked";
                                             }
                                             ?>
                                             <ul>
-                                                <li data-checkstate="{{$checked}}" category="<?php echo $children->id;?>"
+                                                <li data-checkstate="{{$checked}}" category="<?php echo $children->category_id;?>"
                                                     id="child_<?php echo ++$k;?>">{{ $children->category_name }}</li>
                                             </ul>
                                         @endforeach
