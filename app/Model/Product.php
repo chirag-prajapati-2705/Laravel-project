@@ -9,6 +9,7 @@ class Product extends  \Eloquent
 {
     //
     protected $table='product';
+    protected $primaryKey = 'product_id';
 
     /**
      * The attributes that are mass assignable.
@@ -19,14 +20,13 @@ class Product extends  \Eloquent
         'name', 'sku','price', 'status',
     ];
 
-      public function image(){
-        return $this->hasOne(ProductImage::class,'product_id','id'); // this matches the Eloquent model
+      public function image() {
+        return $this->hasOne(ProductImage::class,'product_id','product_id'); // this matches the Eloquent model
     }
 
     public function productCategory() {
-        return $this->hasMany(ProductCategory::class,'product_id','id'); // this matches the Eloquent model
+        return $this->hasMany(ProductCategory::class,'product_id','product_id'); // this matches the Eloquent model
     }
-
     public function getPrice($price,$prefix=true){
         return ($prefix)?'$'.$price:$price;
     }

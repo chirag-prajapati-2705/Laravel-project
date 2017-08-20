@@ -9,6 +9,7 @@ class ProductCategory extends  \Eloquent
 {
     //
     protected $table='product_category';
+    protected $primaryKey = 'product_category_id';
 
     /**
      * The attributes that are mass assignable.

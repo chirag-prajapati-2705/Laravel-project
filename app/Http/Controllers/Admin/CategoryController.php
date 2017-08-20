@@ -27,13 +27,19 @@ class CategoryController extends Controller
 
     }
 
+    public function index()
+    {
+        $categories = Category::all();
+        return view('admin.category.view')->with('categories', $categories);
+    }
+
     public function create()
     {
+        $category_list=[];
         $categories=Category::all();
         foreach($categories as $category){
-            $category_list[$category->id]=$category->category_name;
+            $category_list[$category->category_id]=$category->category_name;
         }
-
         return view('admin.category.create')->with('categories',$category_list);
     }
 
@@ -53,20 +59,19 @@ class CategoryController extends Controller
             $category->fill($request->all());
             $category->save();
             Session::flash('success', 'Category successfully created!');
-            return Redirect('admin/category/show');
+            return Redirect('admin/category');
         }
     }
 
-    public function edit($category_id, Request $request)
+    public function edit($category_id)
     {
 
         $category = Category::find($category_id);
         return view('admin.category.edit', compact('category'));
     }
-    public function show()
+    public function show($id)
     {
-        $categories = Category::all();
-        return view('admin.category.view')->with('categories', $categories);
+
     }
 
     public function update($category_id, Request $request)
@@ -93,7 +98,7 @@ class CategoryController extends Controller
         $delete_category = Category::destroy($category_id);
         if ($delete_category) {
             Session::flash('success', 'Category successfully deleted!');
-            return Redirect('admin/category/show');
+            return Redirect('admin/category');
         }
     }
 }

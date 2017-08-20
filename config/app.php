@@ -147,6 +147,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        \App\Providers\RepositoryProvider::class,
 
 
         /*
@@ -158,6 +159,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
+        App\Providers\ComposerServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         \Netshell\Paypal\PaypalServiceProvider::class
 
