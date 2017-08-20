@@ -47,7 +47,6 @@ class ProductController extends Controller
         if ($validator->fails()) {
             return Redirect::to('admin/product/create')->withInput()->withErrors($validator);
         } else {
-
             $product = New Product();
             $product->fill($request->all());
             $product->save();
@@ -62,8 +61,7 @@ class ProductController extends Controller
             if ($request->get('category_name')) {
                 $this->saveCategory($request->get('category_name'), $product->product_id);
             }
-
-            Session::flash('success', 'Product successfully created!');
+           Session::flash('success', 'Product successfully created!');
             return Redirect('admin/product/show');
         }
     }

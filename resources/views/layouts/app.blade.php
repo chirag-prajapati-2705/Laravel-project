@@ -71,6 +71,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <img src="{{ URL::asset('front/images/cart.png')}}" alt=""/></h3>
                     </a>
 
+    <!-- Styles -->
+    <!-- Bootstrap Core CSS -->
+    <link href="{{ URL::asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('css/style_custom.css') }}" rel="stylesheet">
+    {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
                     <p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
 
                 </div>

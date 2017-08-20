@@ -27,4 +27,7 @@ class Product extends  \Eloquent
     public function productCategory() {
         return $this->hasMany(ProductCategory::class,'product_id','product_id'); // this matches the Eloquent model
     }
+    public function getPrice($price,$prefix=true){
+        return ($prefix)?'$'.$price:$price;
+    }
 }

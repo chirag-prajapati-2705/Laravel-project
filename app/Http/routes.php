@@ -36,6 +36,7 @@ Route::group(['middleware' => 'web'], function () {
     // Route::auth();
 });
 Route::get('/', "HomeController@index");
+});
 
 // admin/test
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
@@ -92,6 +93,7 @@ Route::post('register', 'RegistrationController@store')->name('register');
 Route::get('/login', function () {
     return redirect('admin/login');
 });
+Route::any('payment/store-payment','PayPalController@getCheckout');
 Route::get('/{slug}', function ($slug) {
     $app=app();
     if (\App\Model\Product::where('sku', $slug)->count()) {
@@ -103,4 +105,10 @@ Route::get('/{slug}', function ($slug) {
     } else {
         return view('errors.404');
     }
+});
+});
+Route::get('register', 'RegistrationController@show')->name('registration');
+Route::post('register', 'RegistrationController@store')->name('register');
+Route::get('/login', function () {
+    return redirect('admin/login');
 });
