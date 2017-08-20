@@ -162,7 +162,8 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         App\Providers\ComposerServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-        \Netshell\Paypal\PaypalServiceProvider::class
+        \Netshell\Paypal\PaypalServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
 
 
     ],
@@ -214,7 +215,8 @@ return [
         'Html'      => Collective\Html\HtmlFacade::class,
         'Input' => Illuminate\Support\Facades\Input::class,
         'Image' => Intervention\Image\Facades\Image::class,
-        'Paypal' => \Netshell\Paypal\Facades\Paypal::class
+        'Paypal' => \Netshell\Paypal\Facades\Paypal::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
     ],
 

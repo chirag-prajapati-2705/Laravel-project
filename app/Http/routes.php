@@ -36,7 +36,6 @@ Route::group(['middleware' => 'web'], function () {
     // Route::auth();
 });
 Route::get('/', "HomeController@index");
-});
 
 // admin/test
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
@@ -105,7 +104,7 @@ Route::get('/{slug}', function ($slug) {
     } else {
         return view('errors.404');
     }
-});
+
 });
 Route::get('register', 'RegistrationController@show')->name('registration');
 Route::post('register', 'RegistrationController@store')->name('register');
